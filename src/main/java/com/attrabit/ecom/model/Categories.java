@@ -6,6 +6,7 @@ import lombok.Data;
 import java.util.Date;
 import java.util.List;
 
+
 @Entity
 @Table(name = "categories")
 @Data
@@ -24,7 +25,7 @@ public class Categories {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id", referencedColumnName = "id", nullable = true, foreignKey = @ForeignKey(name = "fk_categories_parent_id"))
+    @JoinColumn(name = "parent_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_categories_parent_id"))
     private Categories parent;
 
     @Column(name = "slug")
@@ -33,17 +34,19 @@ public class Categories {
     @Column(name = "position")
     private Integer position;
 
+
     @Column(name = "is_searchable")
     private Boolean isSearchable;
 
     @Column(name = "is_active")
-    private Boolean isActive;
+    private boolean isActive;
 
     @Column(name = "created_at")
     private Date createdAt;
 
     @Column(name = "updated_at")
     private Date updatedAt;
+
 
     @OneToMany(orphanRemoval = true, mappedBy = "categories")
     private List<MenuItems> menuItems;
