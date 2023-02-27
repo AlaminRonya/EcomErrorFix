@@ -78,4 +78,7 @@ public class Coupons {
     @OneToMany(orphanRemoval = true, mappedBy = "coupons")
     private List<CouponProducts> coupons;
     // Getters and setters
+
+    @OneToMany(orphanRemoval = true, mappedBy = "coupons")
+    private List<CouponCategories> couponCategories;
 }
