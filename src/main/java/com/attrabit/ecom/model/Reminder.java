@@ -6,22 +6,27 @@ import lombok.Data;
 import java.util.Date;
 
 @Entity
-@Table(name = "activations")
+@Table(name = "reminders")
 @Data
-public class Activations {
+public class Reminder {
+    @SequenceGenerator(
+            name = "reminders_sequence",
+            sequenceName = "reminders_sequence",
+            allocationSize = 1
+    )
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "reminders_sequence"
+    )
+    @Column(name = "id")
     private Long id;
-
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private Users user;
 
     @Column(name = "code")
     private String code;
 
     @Column(name = "completed")
-    private boolean completed;
+    private Boolean completed;
 
     @Column(name = "completed_at")
     private Date completedAt;

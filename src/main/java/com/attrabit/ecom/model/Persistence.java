@@ -6,11 +6,20 @@ import lombok.Data;
 import java.util.Date;
 
 @Entity
-@Table(name = "activations")
+@Table(name = "persistences")
 @Data
-public class Activations {
+public class Persistence {
+    @SequenceGenerator(
+            name = "persistences_sequence",
+            sequenceName = "persistences_sequence",
+            allocationSize = 1
+    )
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "persistences_sequence"
+    )
+    @Column(name = "id")
     private Long id;
 
 //    @ManyToOne
@@ -20,21 +29,14 @@ public class Activations {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "completed")
-    private boolean completed;
-
-    @Column(name = "completed_at")
-    private Date completedAt;
-
     @Column(name = "created_at")
     private Date createdAt;
 
     @Column(name = "updated_at")
     private Date updatedAt;
+    // getters and setters
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY) //, targetEntity = User.class)
     @JoinColumn(name = "users_id", referencedColumnName = "id")
     private Users users;
-
-    // getters and setters
 }

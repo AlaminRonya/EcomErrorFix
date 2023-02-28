@@ -55,6 +55,14 @@ public class Users implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+
+
+    @OneToMany(orphanRemoval = true, mappedBy = "users")
+    private List<Persistence> persistences;
+
+    @OneToMany(orphanRemoval = true, mappedBy = "customers")
+    private List<DefaultAddress> defaultAddresses;
+
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 
