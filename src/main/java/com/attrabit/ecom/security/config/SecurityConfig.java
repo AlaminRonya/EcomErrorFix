@@ -59,7 +59,7 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests(auth -> {
-                            auth.requestMatchers(new String[]{"/api/v1/home/**","/api/v1/users/**"}).permitAll().anyRequest().authenticated();
+                            auth.requestMatchers(new String[]{"/api/v1/home/**","/api/v1/users/**", "/api/v1/file/**"}).permitAll().anyRequest().authenticated();
 //                            auth.requestMatchers("/api/v1/auth/**").hasAnyRole("ROLE_MEMBER").anyRequest().authenticated();
                 })
                 .logout()

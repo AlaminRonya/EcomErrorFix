@@ -28,7 +28,7 @@ public class EntityFiles {
 
     @ManyToOne(fetch = FetchType.LAZY) //, targetEntity = User.class)
     @JoinColumn(name = "file_id", referencedColumnName = "id")
-    private Files file;
+    private Attachment file;
 
     @Column(name = "entity_type")
     private String entityType;

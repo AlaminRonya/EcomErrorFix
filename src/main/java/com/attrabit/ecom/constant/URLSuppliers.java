@@ -14,4 +14,5 @@ public class URLSuppliers {
 
     public static final String AUTH_CONTROLLER_BASE = BASE_URL +"/auth";
     public static final String USER_DASHBOARD = AUTH_CONTROLLER_BASE+"/dashboard";
+
 }
