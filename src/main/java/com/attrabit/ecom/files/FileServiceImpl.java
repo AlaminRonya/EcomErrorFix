@@ -1,8 +1,7 @@
 package com.attrabit.ecom.files;
 
 import com.attrabit.ecom.model.Attachment;
-import com.attrabit.ecom.repository.FileRepository;
-import com.attrabit.ecom.utils.Constant;
+import com.attrabit.ecom.repository.AttachmentRepository;
 import com.attrabit.ecom.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,13 +16,18 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService{
-    private final FileRepository fileRepository;
+    private final AttachmentRepository fileRepository;
     @Override
     public Attachment uploadImage(String path, MultipartFile file) throws IOException {
+
+
+        return getAttachment(path, file);
+    }
+
+    private Attachment getAttachment(String path, MultipartFile file) throws IOException {
+
         final String originalFilename = file.getOriginalFilename();
         final String contentType = file.getContentType();
-
-
 
         //File name
         String name = file.getOriginalFilename();
@@ -36,11 +40,10 @@ public class FileServiceImpl implements FileService{
 
 
         //Full path
-//        String filePath = path+ File.separator+name;
-        String filePath = Constant.IMAGE_PATH + File.separator+fileName1;
+        String filePath = path + File.separator+fileName1;
 
         //create folder if not created
-        File f = new File(Constant.IMAGE_PATH);
+        File f = new File(path);
         if (!f.exists()){
             f.mkdir();
         }
@@ -48,13 +51,13 @@ public class FileServiceImpl implements FileService{
         //File copy
         Files.copy(file.getInputStream(), Paths.get(filePath));
 
-//        Attachment attachment = new Attachment();
-//        attachment.setFilename(originalFilename);
-//        attachment.setExtension(contentType);
-//        attachment.setPath(filePath);
-//        attachment.setDisk(fileName1);
-//        attachment.setCreatedAt(DateUtils.getDate());
+        Attachment attachment = new Attachment();
+        attachment.setFilename(originalFilename);
+        attachment.setExtension(contentType);
+        attachment.setPath(filePath);
+        attachment.setDisk(fileName1);
+        attachment.setCreatedAt(DateUtils.getDate());
 
-        return null;
+        return attachment;
     }
 }
