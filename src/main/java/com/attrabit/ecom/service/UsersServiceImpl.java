@@ -28,9 +28,10 @@ public class UsersServiceImpl implements UsersService{
     public void usersInfo(String userEmail, MultipartFile image, RequestAddressDTO dto) {
         try {
             System.out.println("-------------------------------------");
+
             System.out.println(userEmail);
             final Optional<Users> byEmail = usersRepository.findByEmail(userEmail);
-            System.out.println("=====>"+byEmail.get());
+
             if (byEmail.isEmpty()){
                 return;
             }
@@ -40,7 +41,7 @@ public class UsersServiceImpl implements UsersService{
             final Addresses addresses = addressService.addUserAddress(userEmail, dto);
             final Attachment attachment1 = attachmentService.addAttachment(userEmail, attachment);
 
-            usersRepository.updateUsersInfoById(users.getId(), attachment1, addresses, DateUtils.getDate());
+//            usersRepository.updatedUsersInfoById(users.getId(), attachment1, addresses);
 
 
 
@@ -48,4 +49,11 @@ public class UsersServiceImpl implements UsersService{
             System.out.println(e.getMessage());
         }
     }
+
+    @Override
+    public Users getUsers(String email) {
+        return usersRepository.findByEmail(email).orElse(null);
+    }
+
+
 }
