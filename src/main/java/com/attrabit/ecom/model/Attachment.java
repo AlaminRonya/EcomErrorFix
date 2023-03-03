@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "files")
 @Data
-public class Files {
+public class Attachment {
     @SequenceGenerator(
             name = "files_sequence",
             sequenceName = "files_sequence",
