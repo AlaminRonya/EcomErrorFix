@@ -19,7 +19,8 @@ public class OptionValueTranslations {
     )
     @Column(name = "id")
     private Long id;
-    @Column(name = "price")
+    @Column(name = "price" +
+            "")
     private Double price;
 
     @ManyToOne(fetch = FetchType.LAZY) //, targetEntity = User.class)
