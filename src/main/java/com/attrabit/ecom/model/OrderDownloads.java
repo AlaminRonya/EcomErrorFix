@@ -21,13 +21,13 @@ public class OrderDownloads {
     @Column(name = "id")
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "order_id", referencedColumnName = "id")
-//    private Orders order;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "file_id", referencedColumnName = "id")
-//    private Files file;
+    @ManyToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Orders order;
+
+    @ManyToOne
+    @JoinColumn(name = "file_id", referencedColumnName = "id")
+    private Files file;
 
 
 }

@@ -3,6 +3,9 @@ package com.attrabit.ecom.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "orders")
 @Data
@@ -69,6 +72,7 @@ public class Orders {
 
     @Column(name = "shipping_state", nullable = false)
     private String shippingState;
+
 
     // constructors, getters, and setters
 
