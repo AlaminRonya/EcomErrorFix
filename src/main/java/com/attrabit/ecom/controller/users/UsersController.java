@@ -14,10 +14,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
@@ -41,5 +38,9 @@ public class UsersController {
         }
 
         return new ResponseEntity<>("User Info", HttpStatus.OK);
+    }
+    @GetMapping("")
+    public ResponseEntity<String> getUserByEmail(@PathVariable("email") String email){
+        return new ResponseEntity<>("Users info", HttpStatus.OK);
     }
 }
