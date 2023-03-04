@@ -24,9 +24,9 @@ public class OptionValues {
     @Column(name = "id")
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "option_id", nullable = false, updatable = false)
-//    private Options option;
+    @ManyToOne
+    @JoinColumn(name = "option_id", nullable = false, updatable = false)
+    private Options option;
 
     @Column(name = "price")
     private Double price;

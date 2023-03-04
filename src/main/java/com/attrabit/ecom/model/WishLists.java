@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "wish_lists")
@@ -26,10 +27,10 @@ public class WishLists {
     private Products product;
 
     @Column(name = "created_at", nullable = true)
-    private Timestamp createdAt;
+    private Date createdAt;
 
     @Column(name = "updated_at", nullable = true)
-    private Timestamp updatedAt;
+    private Date updatedAt;
 
     // constructors, getters, and setters
 
