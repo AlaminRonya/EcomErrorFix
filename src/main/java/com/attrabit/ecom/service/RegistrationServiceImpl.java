@@ -47,6 +47,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     public AuthenticationResponse addUser(RequestUserDTO dto) throws ApiMessage {
         try {
             Users user = requestUserDTOMapper.apply(dto);
+
             Optional<Users> byEmail = usersRepository.findByEmail(user.getEmail());
             if (byEmail.isPresent()){
                 throw new ApiMessage("Already user exited!");

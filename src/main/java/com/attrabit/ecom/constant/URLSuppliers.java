@@ -12,7 +12,7 @@ public class URLSuppliers {
     public static final String USER_LOGIN = USERS_URL +"/login";
     public static final String USER_LOGOUT = USERS_URL +"/logout";
 
-    public static final String AUTH_CONTROLLER_BASE = BASE_URL +"/auth/users/id/";
+    public static final String AUTH_CONTROLLER_BASE = BASE_URL +"/auth";
     public static final String USER_DASHBOARD = AUTH_CONTROLLER_BASE+"/dashboard";
     public static final String USER_INFO = AUTH_CONTROLLER_BASE+"/info";
 

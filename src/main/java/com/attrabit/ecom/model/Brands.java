@@ -15,6 +15,9 @@ public class Brands {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name= "brand_name", nullable = false, unique = true )
+    private String brandName;
+
     @Column(name = "slug", nullable = false)
     private String slug;
 

@@ -1,5 +1,6 @@
 package com.attrabit.ecom.controller;
 
+import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.model.Brands;
 import com.attrabit.ecom.service.BrandsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +36,13 @@ public class BrandsController {
     }
 
     @PostMapping
-    public ResponseEntity<Brands> addBrand(@RequestBody Brands brand) {
+    public ResponseEntity<Brands> addBrand(@RequestBody Brands brand) throws ApiMessage {
         Brands savedBrand = brandsService.save(brand);
         return new ResponseEntity<>(savedBrand, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Brands> updateBrand(@PathVariable Long id, @RequestBody Brands brand) {
+    public ResponseEntity<Brands> updateBrand(@PathVariable Long id, @RequestBody Brands brand) throws ApiMessage {
         Optional<Brands> brandOptional = brandsService.findById(id);
         if (brandOptional.isPresent()) {
             Brands existingBrand = brandOptional.get();

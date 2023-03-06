@@ -23,6 +23,8 @@ public class RegistrationController {
 
     @PostMapping(URLSuppliers.USER_SIGNUP)
     public ResponseEntity<AuthenticationResponse> addUser(@Valid @RequestBody RequestUserDTO dto) throws ApiMessage {
+
+        System.out.println(dto);
 //        System.out.println(dto);
 //        User user = new User();
 //        user.setFirstName(dto.firstName());
