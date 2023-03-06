@@ -1,7 +1,11 @@
 package com.attrabit.ecom.service;
 
 import com.attrabit.ecom.dto.request.RequestAddressDTO;
+import com.attrabit.ecom.dto.respose.ResponseAddressDTO;
+import com.attrabit.ecom.dto.respose.ResponseUserDTO;
+import com.attrabit.ecom.dto.respose.ResponseUserInfoDTO;
 import com.attrabit.ecom.files.FileService;
+import com.attrabit.ecom.mapper.ResponseUserDTOMapper;
 import com.attrabit.ecom.model.Addresses;
 import com.attrabit.ecom.model.Attachment;
 import com.attrabit.ecom.model.Users;
@@ -13,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,6 +28,7 @@ public class UsersServiceImpl implements UsersService{
     private final AddressService addressService;
     private final FileService fileService;
     private final AttachmentService attachmentService;
+    private final ResponseUserDTOMapper responseUserDTOMapper;
 
     @Override
     public void usersInfo(String userEmail, MultipartFile image, RequestAddressDTO dto) {
@@ -51,9 +57,16 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public void getUsers(String email) {
+    public ResponseUserInfoDTO getUsers(String email) {
         final Users users = usersRepository.findByEmail(email).orElse(null);
+        if (users == null){
+            return null;
+        }
+        var addressUsers = addressService.getAddressUsers(email);
+        var attachment = attachmentService.getAttachmentByUserEmail(email);
+        var apply = responseUserDTOMapper.apply(users);
 
+        return new ResponseUserInfoDTO(apply, addressUsers, attachment);
 
     }
 
