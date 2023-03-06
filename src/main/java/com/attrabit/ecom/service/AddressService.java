@@ -6,4 +6,5 @@ import com.attrabit.ecom.model.Addresses;
 
 public interface AddressService {
     Addresses addUserAddress(String userEmail, RequestAddressDTO dto);
+
 }
