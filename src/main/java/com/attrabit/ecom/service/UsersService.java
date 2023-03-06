@@ -9,5 +9,5 @@ import java.util.List;
 public interface UsersService {
     void usersInfo(String userEmail, MultipartFile image, RequestAddressDTO dto);
 
-    Users getUsers(String email);
+    void getUsers(String email);
 }

@@ -7,18 +7,18 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "files")
+@Table(name = "attachment")
 @Data
 public class Attachment {
     @SequenceGenerator(
-            name = "files_sequence",
-            sequenceName = "files_sequence",
+            name = "attachment_sequence",
+            sequenceName = "attachment_sequence",
             allocationSize = 1
     )
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "files_sequence"
+            generator = "attachment_sequence"
     )
     @Column(name = "id")
     private Long id;
