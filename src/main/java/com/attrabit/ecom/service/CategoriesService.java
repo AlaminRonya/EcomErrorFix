@@ -16,4 +16,5 @@ public interface CategoriesService {
     void addCategory(RequestCategoryDTO dto) throws ApiMessage;
     List<ResponseCategoryDTO> getAllCategory();
     void deleteCategory(String slug) throws ApiMessage;
+    void updateCategory(String slug, String slug2) throws ApiMessage;
 }

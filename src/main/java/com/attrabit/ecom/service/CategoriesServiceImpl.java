@@ -12,13 +12,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CategoriesServiceImpl implements CategoriesService{
+public class CategoriesServiceImpl implements CategoriesService, CategorySearchService{
     private final CategoriesRepository categoriesRepository;
     private final RequestCategoryDTOMapper requestCategoryDTOMapper;
     private final ResponseCategoryDTOMapper responseCategoryDTOMapper;
@@ -60,23 +61,44 @@ public class CategoriesServiceImpl implements CategoriesService{
         }
     }
 
+    @Override
+    public void updateCategory(String slug, String slug2) throws ApiMessage {
+        final Categories categories = searchSlug(slug);
+        if (categories != null){
+            categories.setSlug(slug2.trim().toUpperCase());
+            categoriesRepository.save(categories);
+        }else {
+            throw new ApiMessage("No search by slug name");
+        }
+    }
+
     private Categories searchSlug(String slug){
         return categoriesRepository.findBySlug(slug.trim().toUpperCase()).orElse(null);
     }
 
-//    public List<Categories> getAllCategories() {
-//        return categoriesRepository.findAll();
-//    }
-//
-//    public Optional<Categories> getCategoryById(Long id) {
-//        return categoriesRepository.findById(id);
-//    }
-//
-//    public Categories saveCategory(Categories category) {
-//        return categoriesRepository.save(category);
-//    }
-//
-//    public void deleteCategoryById(Long id) {
-//        categoriesRepository.deleteById(id);
-//    }
+    @Override
+    public ResponseCategoryDTO getCategoryBySlug(String slug) {
+
+        return responseCategoryDTOMapper.apply(searchSlug(slug));
+    }
+
+    @Override
+    public List<ResponseCategoryDTO> getAllSubCategory(String slug) {
+        final Categories categories = searchSlug(slug);
+        if (categories == null){
+            return null;
+        }
+
+        final Optional<List<Categories>> byParent = categoriesRepository.findAllByParent(categories);
+        if (byParent.isEmpty()){
+            return null;
+        }
+        List<ResponseCategoryDTO> categoryDTOList = new ArrayList<>();
+        for (Categories c: byParent.get()){
+            categoryDTOList.add(responseCategoryDTOMapper.apply(c));
+        }
+        return categoryDTOList;
+    }
+
+
 }
