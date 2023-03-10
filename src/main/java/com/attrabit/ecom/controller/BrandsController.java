@@ -2,7 +2,7 @@ package com.attrabit.ecom.controller;
 
 import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.model.Brands;
-import com.attrabit.ecom.service.BrandsService;
+import com.attrabit.ecom.service.BrandsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/brands")
+@RequestMapping("/api/v1/users/brands")
 public class BrandsController {
 
     @Autowired
-    private BrandsService brandsService;
+    private BrandsServiceImpl brandsService;
 
     @GetMapping
     public ResponseEntity<List<Brands>> getAllBrands() {
