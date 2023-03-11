@@ -30,6 +30,8 @@ public class Products {
     @JoinColumn(name = "brand_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_products_brand"))
     private Brands brand;
 
+    @Column(name = "product_name")
+    private String productName;
     @Column(name = "tax_class_id")
     private Long taxClassId;
 

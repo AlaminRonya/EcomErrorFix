@@ -11,7 +11,7 @@ public class RequestProductDTOMapper implements Function<RequestProductDTO, Prod
     @Override
     public Products apply(RequestProductDTO dto) {
         Products products = new Products();
-
+        products.setProductName(dto.productName());
         products.setSlug(dto.slug());
         products.setPrice(dto.price());
         products.setSpecialPrice(dto.specialPrice());
