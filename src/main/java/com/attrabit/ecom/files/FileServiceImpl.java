@@ -41,7 +41,7 @@ public class FileServiceImpl implements FileService{
 
         //Full path
         //System.getProperty("user.home")
-        String filePath = path + File.separator+fileName1;
+        String filePath = path +"/"+fileName1;
 
         //create folder if not created
         File f = new File(path);
@@ -53,7 +53,7 @@ public class FileServiceImpl implements FileService{
         Files.copy(file.getInputStream(), Paths.get(filePath));
 
         Attachment attachment = new Attachment();
-        attachment.setFilename(originalFilename);
+        attachment.setFilename(fileName1);
         attachment.setExtension(contentType);
         attachment.setPath(filePath);
         attachment.setDisk(fileName1);

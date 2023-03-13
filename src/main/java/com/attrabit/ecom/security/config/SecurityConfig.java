@@ -72,6 +72,23 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // TODO: 3/11/2023 role base solution
+
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http.csrf().disable()
+//                .authorizeHttpRequests()
+//                .requestMatchers("/api/v1/home/**").permitAll().and()
+//                .authorizeHttpRequests().requestMatchers("/api/v1/auth/**")
+//                .hasAuthority("ADMIN").anyRequest().authenticated()
+//                .and().sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .authenticationProvider(authenticationProvider())
+//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+//                .build();
+//    }
+
 
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Table(name = "products")
@@ -92,5 +93,12 @@ public class Products {
     @Column(name = "virtual_at")
     private Boolean virtualAt;
 
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinTable(name = "product_attachments",
+            joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "attachment_id", referencedColumnName = "id")})
+    private List<Attachment> productAttachmentList;
+
     // getters and setters
+
 }
