@@ -1,64 +1,70 @@
 package com.attrabit.ecom.controller;
 
-import com.attrabit.ecom.dto.request.RequestBrandsDTO;
-import com.attrabit.ecom.dto.response.ResponseBrandsDTO;
-import com.attrabit.ecom.exception.ResourceNotFoundException;
-import com.attrabit.ecom.service.BrandsService;
-import jakarta.validation.Valid;
+import com.attrabit.ecom.exception.ApiMessage;
+import com.attrabit.ecom.model.Brands;
+import com.attrabit.ecom.service.BrandsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/brands")
+@RequestMapping("/api/v1/users/brands")
 public class BrandsController {
 
-    private final BrandsService brandsService;
-
     @Autowired
-    public BrandsController(BrandsService brandsService) {
-        this.brandsService = brandsService;
+    private BrandsServiceImpl brandsService;
+
+    @GetMapping
+    public ResponseEntity<List<Brands>> getAllBrands() {
+        List<Brands> brandsList = brandsService.findAll();
+        return new ResponseEntity<>(brandsList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseBrandsDTO> getBrandById(@PathVariable Long id) throws ResourceNotFoundException {
-        ResponseBrandsDTO brand = brandsService.getBrandById(id);
-        return ResponseEntity.ok(brand);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<ResponseBrandsDTO>> getAllBrands() {
-        List<ResponseBrandsDTO> brands = brandsService.getAllBrands();
-        return ResponseEntity.ok(brands);
+    public ResponseEntity<Brands> getBrandById(@PathVariable Long id) {
+        Optional<Brands> brandOptional = brandsService.findById(id);
+        if (brandOptional.isPresent()) {
+            Brands brand = brandOptional.get();
+            return new ResponseEntity<>(brand, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
-    public ResponseEntity<ResponseBrandsDTO> createBrand(@Valid @RequestBody RequestBrandsDTO requestBrandsDTO) {
-        System.out.println(requestBrandsDTO);
-        ResponseBrandsDTO brand = brandsService.createBrand(requestBrandsDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(brand);
+    public ResponseEntity<Brands> addBrand(@RequestBody Brands brand) throws ApiMessage {
+        Brands savedBrand = brandsService.save(brand);
+        return new ResponseEntity<>(savedBrand, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseBrandsDTO> updateBrand(@PathVariable Long id, @Valid @RequestBody RequestBrandsDTO requestBrandsDTO) throws ResourceNotFoundException {
-        ResponseBrandsDTO brand = brandsService.updateBrand(id, requestBrandsDTO);
-        return ResponseEntity.ok(brand);
+    public ResponseEntity<Brands> updateBrand(@PathVariable Long id, @RequestBody Brands brand) throws ApiMessage {
+        Optional<Brands> brandOptional = brandsService.findById(id);
+        if (brandOptional.isPresent()) {
+            Brands existingBrand = brandOptional.get();
+            existingBrand.setSlug(brand.getSlug());
+            existingBrand.setIsActive(brand.getIsActive());
+            existingBrand.setCreatedAt(brand.getCreatedAt());
+            existingBrand.setUpdatedAt(brand.getUpdatedAt());
+            Brands updatedBrand = brandsService.save(existingBrand);
+            return new ResponseEntity<>(updatedBrand, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBrand(@PathVariable Long id) throws ResourceNotFoundException {
-        brandsService.deleteBrand(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/search/{brandName}")
-    public ResponseEntity<List<ResponseBrandsDTO>> searchBrandByName(@PathVariable("brandName") String brandName) {
-//        System.out.println(brandName);
-//        return null;
-        List<ResponseBrandsDTO> brands = brandsService.searchBrandByName(brandName);
-        return ResponseEntity.ok(brands);
+    public ResponseEntity<HttpStatus> deleteBrand(@PathVariable Long id) {
+        Optional<Brands> brandOptional = brandsService.findById(id);
+        if (brandOptional.isPresent()) {
+            brandsService.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

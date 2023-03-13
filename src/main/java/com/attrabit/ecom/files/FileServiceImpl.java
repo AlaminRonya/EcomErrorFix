@@ -40,6 +40,7 @@ public class FileServiceImpl implements FileService{
 
 
         //Full path
+        //System.getProperty("user.home")
         String filePath = path + File.separator+fileName1;
 
         //create folder if not created

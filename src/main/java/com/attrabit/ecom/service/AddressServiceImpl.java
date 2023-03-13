@@ -1,8 +1,10 @@
 package com.attrabit.ecom.service;
 
 import com.attrabit.ecom.dto.request.RequestAddressDTO;
+import com.attrabit.ecom.dto.respose.ResponseAddressDTO;
 import com.attrabit.ecom.mapper.ComparedAddressDTOMapper;
 import com.attrabit.ecom.mapper.RequestAddressDTOMapper;
+import com.attrabit.ecom.mapper.ResponseAddressDTOMapper;
 import com.attrabit.ecom.model.Addresses;
 import com.attrabit.ecom.model.Users;
 import com.attrabit.ecom.repository.AddressRepository;
@@ -22,6 +24,8 @@ public class AddressServiceImpl implements AddressService{
     private final UsersRepository usersRepository;
     private final ComparedAddressDTOMapper comparedAddressDTOMapper;
 
+    private final ResponseAddressDTOMapper responseAddressDTOMapper;
+
     @Override
     public Addresses addUserAddress(String userEmail, RequestAddressDTO dto) {
         final Addresses addresses = requestAddressDTOMapper.apply(dto);
@@ -39,5 +43,16 @@ public class AddressServiceImpl implements AddressService{
         }
         addresses.setCustomers(byEmail.get());
         return addressRepository.save(addresses);
+    }
+
+    @Override
+    public ResponseAddressDTO getAddressUsers(String email) {
+        return responseAddressDTOMapper.apply(getAddress(email));
+    }
+
+    private Addresses getAddress(String email){
+        final Optional<Users> byEmail = usersRepository.findByEmail(email);
+        return byEmail.flatMap(addressRepository::findByCustomers).orElse(null);
+
     }
 }

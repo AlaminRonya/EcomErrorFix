@@ -1,6 +1,9 @@
 package com.attrabit.ecom.dto.response;
 
 
+import com.attrabit.ecom.model.Addresses;
+import com.attrabit.ecom.model.Attachment;
+
 import java.util.Date;
 
 public record ResponseUserDTO(

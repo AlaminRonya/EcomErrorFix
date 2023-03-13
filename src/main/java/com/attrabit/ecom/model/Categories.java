@@ -39,7 +39,7 @@ public class Categories {
     private Boolean isSearchable;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
 
     @Column(name = "created_at")
     private Date createdAt;
