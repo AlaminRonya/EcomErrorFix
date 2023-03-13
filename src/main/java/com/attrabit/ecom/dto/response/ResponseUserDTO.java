@@ -1,4 +1,4 @@
-package com.attrabit.ecom.dto.respose;
+package com.attrabit.ecom.dto.response;
 
 
 import java.util.Date;

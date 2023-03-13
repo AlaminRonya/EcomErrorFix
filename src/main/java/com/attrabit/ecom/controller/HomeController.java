@@ -2,7 +2,7 @@ package com.attrabit.ecom.controller;
 
 
 import com.attrabit.ecom.constant.URLSuppliers;
-import com.attrabit.ecom.dto.respose.ResponseUserDTO;
+import com.attrabit.ecom.dto.response.ResponseUserDTO;
 import com.attrabit.ecom.repository.RolesRepository;
 import com.attrabit.ecom.service.UserService;
 import lombok.RequiredArgsConstructor;

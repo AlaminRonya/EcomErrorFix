@@ -2,6 +2,7 @@ package com.attrabit.ecom.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "coupons")
 @Data
+@ToString
 public class Coupons {
 
     @SequenceGenerator(
@@ -25,7 +27,7 @@ public class Coupons {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "code")
+    @Column(name = "code", unique = true)
     private String code;
 
     @Column(precision = 18, scale = 4)

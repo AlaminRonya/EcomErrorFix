@@ -3,6 +3,7 @@ package com.attrabit.ecom.security.config;
 import com.attrabit.ecom.constant.URLSuppliers;
 import com.attrabit.ecom.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -59,7 +60,7 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests(auth -> {
-                            auth.requestMatchers(new String[]{"/api/v1/home/**","/api/v1/users/**", "/api/v1/file/**"}).permitAll().anyRequest().authenticated();
+                            auth.requestMatchers(new String[]{"/api/v1/users/register","/api/v1/home/**","/reviews/**","/tax-rates/**","/api/v1/users/**","/api/currency-rates/**", "/api/v1/file/**","/api/v1/brands/**","/coupons/**", "/addresses/**","/pages/**","/options/**","/menus/**","/settings/**"}).permitAll().anyRequest().authenticated();
 //                            auth.requestMatchers("/api/v1/auth/**").hasAnyRole("ROLE_MEMBER").anyRequest().authenticated();
                 })
                 .logout()
@@ -116,6 +117,11 @@ public class SecurityConfig {
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
     }
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+
 
 //    @Bean
 //    public UserDetailsService userDetailsService() {

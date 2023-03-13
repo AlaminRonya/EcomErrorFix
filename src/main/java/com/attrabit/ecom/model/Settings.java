@@ -18,7 +18,7 @@ public class Settings {
     private LocalDateTime createdAt;
 
     @Column(name = "is_translatable")
-    private boolean isTranslatable;
+    private Boolean isTranslatable;
 
     @Column(name = "setting_key")
     private String key;
@@ -29,51 +29,5 @@ public class Settings {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public boolean isTranslatable() {
-        return isTranslatable;
-    }
-
-    public void setTranslatable(boolean translatable) {
-        isTranslatable = translatable;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getPlainValue() {
-        return plainValue;
-    }
-
-    public void setPlainValue(String plainValue) {
-        this.plainValue = plainValue;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }

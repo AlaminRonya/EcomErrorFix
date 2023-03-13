@@ -1,6 +1,6 @@
 package com.attrabit.ecom.service;
 
-import com.attrabit.ecom.dto.respose.ResponseUserDTO;
+import com.attrabit.ecom.dto.response.ResponseUserDTO;
 import com.attrabit.ecom.mapper.ResponseUserDTOMapper;
 import com.attrabit.ecom.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;

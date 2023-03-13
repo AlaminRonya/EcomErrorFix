@@ -1,3 +1,4 @@
+//<--Files-->
 package com.attrabit.ecom.model;
 
 import jakarta.persistence.*;
