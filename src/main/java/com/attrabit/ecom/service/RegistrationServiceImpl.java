@@ -2,7 +2,7 @@ package com.attrabit.ecom.service;
 
 import com.attrabit.ecom.dto.request.AuthenticationRequest;
 import com.attrabit.ecom.dto.request.RequestUserDTO;
-import com.attrabit.ecom.dto.respose.AuthenticationResponse;
+import com.attrabit.ecom.dto.response.AuthenticationResponse;
 import com.attrabit.ecom.enums.Role;
 import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.mapper.RequestUserDTOMapper;
@@ -21,11 +21,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

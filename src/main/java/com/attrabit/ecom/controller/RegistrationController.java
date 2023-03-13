@@ -3,7 +3,7 @@ package com.attrabit.ecom.controller;
 import com.attrabit.ecom.constant.URLSuppliers;
 import com.attrabit.ecom.dto.request.AuthenticationRequest;
 import com.attrabit.ecom.dto.request.RequestUserDTO;
-import com.attrabit.ecom.dto.respose.AuthenticationResponse;
+import com.attrabit.ecom.dto.response.AuthenticationResponse;
 import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.service.RegistrationService;
 import jakarta.validation.Valid;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
