@@ -88,6 +88,12 @@ public class ProductServiceImpl implements ProductService, ProductSearchService{
         productRepository.deleteById(products.getId());
     }
 
+    @Override
+    public ResponseProductDTO updateProduct( ResponseProductDTO dto) throws ApiMessage {
+
+        return null;
+    }
+
     private Products searchProductName(String name){
         return productRepository.findByProductName(name).orElse(null);
     }

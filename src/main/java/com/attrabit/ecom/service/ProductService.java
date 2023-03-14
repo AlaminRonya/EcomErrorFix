@@ -12,4 +12,6 @@ public interface ProductService {
     List<ResponseProductDTO> getAllProduct();
     ResponseProductDTO productSearch(String name) throws ApiMessage;
     void productDelete(String name) throws ApiMessage;
+
+    ResponseProductDTO updateProduct( ResponseProductDTO dto) throws ApiMessage;
 }

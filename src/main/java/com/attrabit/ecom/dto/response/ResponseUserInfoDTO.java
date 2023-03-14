@@ -1,6 +1,7 @@
-package com.attrabit.ecom.dto.respose;
+package com.attrabit.ecom.dto.response;
 
-import lombok.Data;
+import com.attrabit.ecom.dto.respose.ResponseAddressDTO;
+import com.attrabit.ecom.dto.respose.ResponseAttachmentDTO;
 
 public record ResponseUserInfoDTO(ResponseUserDTO userDTO, ResponseAddressDTO addressDTO, ResponseAttachmentDTO attachmentDTO) {
 

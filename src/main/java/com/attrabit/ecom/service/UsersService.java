@@ -1,9 +1,9 @@
 package com.attrabit.ecom.service;
 
 import com.attrabit.ecom.dto.request.RequestAddressDTO;
+import com.attrabit.ecom.dto.response.ResponseUserInfoDTO;
 import com.attrabit.ecom.dto.respose.ResponseAddressDTO;
-import com.attrabit.ecom.dto.respose.ResponseUserDTO;
-import com.attrabit.ecom.dto.respose.ResponseUserInfoDTO;
+
 import com.attrabit.ecom.model.Users;
 import org.springframework.web.multipart.MultipartFile;
 
