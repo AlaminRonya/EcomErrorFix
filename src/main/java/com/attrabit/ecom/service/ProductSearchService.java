@@ -1,7 +1,7 @@
 package com.attrabit.ecom.service;
 
-import com.attrabit.ecom.dto.respose.ResponseProductDTO;
-import com.attrabit.ecom.model.Products;
+import com.attrabit.ecom.dto.response.ResponseProductDTO;
+
 
 import java.util.List;
 import java.util.Optional;

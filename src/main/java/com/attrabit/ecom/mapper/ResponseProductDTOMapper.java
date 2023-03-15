@@ -1,6 +1,7 @@
 package com.attrabit.ecom.mapper;
 
-import com.attrabit.ecom.dto.respose.ResponseProductDTO;
+
+import com.attrabit.ecom.dto.response.ResponseProductDTO;
 import com.attrabit.ecom.model.Products;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class ResponseProductDTOMapper implements Function<Products, ResponseProd
                 products.getSpecialPriceEnd(), products.getSellingPrice(), products.getSku(), products.getManageStock(),
                 products.getQty(), products.getInStock(), products.getViewed(), products.getIsActive(), products.getNewFrom(),
                 products.getNewTo(), products.getDeletedAt(), products.getCreatedAt(), products.getUpdatedAt(), products.getVirtualAt(),
-                (products.getProductAttachmentList() != null) ? products.getProductAttachmentList().stream().map(responseAttachmentDTOMapper).collect(Collectors.toList()) : null
+                (products.getProductAttachmentList() != null) ? products.getProductAttachmentList().stream().map(responseAttachmentDTOMapper).collect(Collectors.toList()): null
         ) : null;
     }
 }

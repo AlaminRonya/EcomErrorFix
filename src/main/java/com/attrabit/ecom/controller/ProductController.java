@@ -3,7 +3,7 @@ package com.attrabit.ecom.controller;
 import com.attrabit.ecom.dto.request.RequestAddressDTO;
 import com.attrabit.ecom.dto.request.RequestProductDTO;
 import com.attrabit.ecom.dto.respose.Response;
-import com.attrabit.ecom.dto.respose.ResponseProductDTO;
+import com.attrabit.ecom.dto.response.ResponseProductDTO;
 import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.service.ProductSearchService;
 import com.attrabit.ecom.service.ProductService;
@@ -63,6 +63,22 @@ public class ProductController {
                         .build()
         );
 //        return new ResponseEntity<>("Add product", HttpStatus.CREATED);
+    }
+
+    @PutMapping("/product")
+    public ResponseEntity<?> updateProduct(@RequestBody ResponseProductDTO dto) throws ApiMessage {
+
+//        productService.updateProduct(dto);
+
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("product",productService.updateProduct(dto)))
+                        .message("Success")
+                        .status(CREATED)
+                        .statusCode(CREATED.value())
+                        .build()
+        );
     }
 
     @GetMapping("/product/all")

@@ -1,7 +1,7 @@
 package com.attrabit.ecom.service;
 
 import com.attrabit.ecom.dto.request.RequestCategoryDTO;
-import com.attrabit.ecom.dto.respose.ResponseCategoryDTO;
+import com.attrabit.ecom.dto.response.ResponseCategoryDTO;
 import com.attrabit.ecom.exception.ApiException;
 import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.mapper.RequestCategoryDTOMapper;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +49,7 @@ public class CategoriesServiceImpl implements CategoriesService, CategorySearchS
 
     @Override
     public List<ResponseCategoryDTO> getAllCategory() {
-        return categoriesRepository.findAll().stream().map(responseCategoryDTOMapper).toList();
+        return categoriesRepository.findAll().stream().map(responseCategoryDTOMapper).collect(Collectors.toList());
     }
 
     @Override

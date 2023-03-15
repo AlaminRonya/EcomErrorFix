@@ -1,8 +1,6 @@
 package com.attrabit.ecom.mapper;
 
-import com.attrabit.ecom.dto.request.RequestCategoryDTO;
-import com.attrabit.ecom.dto.respose.ResponseAttachmentDTO;
-import com.attrabit.ecom.dto.respose.ResponseCategoryDTO;
+import com.attrabit.ecom.dto.response.ResponseCategoryDTO;
 import com.attrabit.ecom.model.Categories;
 import com.attrabit.ecom.utils.DateUtils;
 import org.springframework.stereotype.Service;

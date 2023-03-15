@@ -1,7 +1,7 @@
 package com.attrabit.ecom.service;
 
 import com.attrabit.ecom.dto.request.RequestAddressDTO;
-import com.attrabit.ecom.dto.respose.ResponseAddressDTO;
+import com.attrabit.ecom.dto.response.ResponseAddressDTO;
 import com.attrabit.ecom.mapper.ComparedAddressDTOMapper;
 import com.attrabit.ecom.mapper.RequestAddressDTOMapper;
 import com.attrabit.ecom.mapper.ResponseAddressDTOMapper;

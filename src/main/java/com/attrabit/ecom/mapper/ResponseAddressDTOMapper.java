@@ -1,7 +1,7 @@
 package com.attrabit.ecom.mapper;
 
 import com.attrabit.ecom.dto.request.RequestAddressDTO;
-import com.attrabit.ecom.dto.respose.ResponseAddressDTO;
+import com.attrabit.ecom.dto.response.ResponseAddressDTO;
 import com.attrabit.ecom.model.Addresses;
 import com.attrabit.ecom.model.Users;
 import org.springframework.stereotype.Service;

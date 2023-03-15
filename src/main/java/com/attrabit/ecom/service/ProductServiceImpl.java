@@ -1,10 +1,10 @@
 package com.attrabit.ecom.service;
 
 import com.attrabit.ecom.dto.request.RequestProductDTO;
-import com.attrabit.ecom.dto.respose.ResponseAttachmentDTO;
-import com.attrabit.ecom.dto.respose.ResponseProductDTO;
+import com.attrabit.ecom.dto.response.ResponseProductDTO;
 import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.files.FileService;
+import com.attrabit.ecom.mapper.ComparedProductDTOMapper;
 import com.attrabit.ecom.mapper.RequestProductDTOMapper;
 import com.attrabit.ecom.mapper.ResponseAttachmentDTOMapper;
 import com.attrabit.ecom.mapper.ResponseProductDTOMapper;
@@ -32,6 +32,7 @@ public class ProductServiceImpl implements ProductService, ProductSearchService{
     private final FileService fileService;
     private final AttachmentRepository attachmentRepository;
     private final ResponseAttachmentDTOMapper responseAttachmentDTOMapper;
+    private final ComparedProductDTOMapper comparedProductDTOMapper;
     @Override
     public void addProduct(MultipartFile[] multipartFiles, RequestProductDTO dto) throws ApiMessage  {
         try {
@@ -89,9 +90,20 @@ public class ProductServiceImpl implements ProductService, ProductSearchService{
     }
 
     @Override
-    public ResponseProductDTO updateProduct( ResponseProductDTO dto) throws ApiMessage {
+    public ResponseProductDTO updateProduct(ResponseProductDTO dto) throws ApiMessage {
+        try {
+            final Products products = productRepository.findById(dto.id()).orElse(null);
+            if (products == null){
+                throw new ApiMessage("No search product!");
+            }
+            final Products apply = comparedProductDTOMapper.apply(products, dto);
+//        System.out.println(apply);
+            final Products save = productRepository.save(apply);
 
-        return null;
+            return responseProductDTOMapper.apply(save);
+        }catch (Exception e){
+            throw new ApiMessage("Internal error!");
+        }
     }
 
     private Products searchProductName(String name){
@@ -101,7 +113,9 @@ public class ProductServiceImpl implements ProductService, ProductSearchService{
     @Override
     public List<ResponseProductDTO> getSearchSlugProduct(String slug) {
         final Optional<List<Products>> allBySlug = productRepository.findAllBySlug(slug);
-
+        if (allBySlug.isPresent()){
+            System.out.println("++++++++++++++++++");
+        }
         return getAllProduct(allBySlug);
     }
 
