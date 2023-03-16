@@ -11,8 +11,11 @@ import com.attrabit.ecom.mapper.ResponseProductDTOMapper;
 import com.attrabit.ecom.model.Attachment;
 import com.attrabit.ecom.model.Brands;
 import com.attrabit.ecom.model.Products;
+import com.attrabit.ecom.model.TaxClasses;
 import com.attrabit.ecom.repository.AttachmentRepository;
+import com.attrabit.ecom.repository.BrandsRepository;
 import com.attrabit.ecom.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +25,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService, ProductSearchService{
     private final RequestProductDTOMapper requestProductDTOMapper;
@@ -33,6 +37,7 @@ public class ProductServiceImpl implements ProductService, ProductSearchService{
     private final AttachmentRepository attachmentRepository;
     private final ResponseAttachmentDTOMapper responseAttachmentDTOMapper;
     private final ComparedProductDTOMapper comparedProductDTOMapper;
+    private final TaxClassesService taxClassesService;
     @Override
     public void addProduct(MultipartFile[] multipartFiles, RequestProductDTO dto) throws ApiMessage  {
         try {
@@ -46,10 +51,15 @@ public class ProductServiceImpl implements ProductService, ProductSearchService{
             final List<Attachment> attachmentList = attachmentRepository.saveAll(attachments);
 
             // TODO: 3/11/2023 checking taxClasses ID
+            final TaxClasses taxClasses = taxClassesService.getTaxClasses(dto.taxClass());
+
             final Products products = requestProductDTOMapper.apply(dto);
             final Brands brands = brandSearchService.getBrandsID(dto.brand());
+
             products.setBrand(brands);
             products.setProductAttachmentList(attachmentList);
+            products.setTaxClassId(taxClasses.getId());
+
             productRepository.save(products);
 
         }catch (Exception e){
@@ -120,8 +130,9 @@ public class ProductServiceImpl implements ProductService, ProductSearchService{
     }
 
     @Override
-    public List<ResponseProductDTO> getSearchBrandProduct(String brandName) {
+    public List<ResponseProductDTO> getSearchBrandProduct(String brandName) throws ApiMessage {
         final Brands brands = brandSearchService.getBrandsID(brandName);
+
         if (brands == null){
             return null;
         }

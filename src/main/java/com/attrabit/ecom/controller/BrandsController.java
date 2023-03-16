@@ -2,7 +2,9 @@ package com.attrabit.ecom.controller;
 
 import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.model.Brands;
+import com.attrabit.ecom.service.BrandSearchService;
 import com.attrabit.ecom.service.BrandsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +15,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/users/brands")
+@RequiredArgsConstructor
 public class BrandsController {
 
-    @Autowired
-    private BrandsServiceImpl brandsService;
+    private final BrandsServiceImpl brandsService;
+    private final BrandSearchService brandSearchService;
 
     @GetMapping
     public ResponseEntity<List<Brands>> getAllBrands() {
@@ -66,5 +69,11 @@ public class BrandsController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/search/{brandName}")
+    public ResponseEntity<?> getBrandSearch(@PathVariable("brandName") String brandName) throws ApiMessage {
+//        brandsService.getBrandsID(brandName);
+        return new ResponseEntity<>(brandsService.getBrandsID(brandName), HttpStatus.OK);
     }
 }

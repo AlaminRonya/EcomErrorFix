@@ -127,7 +127,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/brand/{brandName}")
-    public ResponseEntity<?> getBrandSearch(@PathVariable("brandName") String brandName){
+    public ResponseEntity<?> getBrandSearch(@PathVariable("brandName") String brandName) throws ApiMessage {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
