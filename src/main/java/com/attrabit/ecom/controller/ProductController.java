@@ -2,7 +2,7 @@ package com.attrabit.ecom.controller;
 
 import com.attrabit.ecom.dto.request.RequestAddressDTO;
 import com.attrabit.ecom.dto.request.RequestProductDTO;
-import com.attrabit.ecom.dto.respose.Response;
+import com.attrabit.ecom.dto.response.Response;
 import com.attrabit.ecom.dto.response.ResponseProductDTO;
 import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.service.ProductSearchService;

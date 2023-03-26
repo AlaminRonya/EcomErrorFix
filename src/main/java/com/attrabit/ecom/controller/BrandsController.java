@@ -1,5 +1,6 @@
 package com.attrabit.ecom.controller;
 
+import com.attrabit.ecom.dto.response.Response;
 import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.model.Brands;
 import com.attrabit.ecom.service.BrandSearchService;
@@ -11,20 +12,34 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import static java.time.LocalDateTime.now;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @RestController
 @RequestMapping("/api/v1/users/brands")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:4200")
 public class BrandsController {
 
     private final BrandsServiceImpl brandsService;
     private final BrandSearchService brandSearchService;
 
-    @GetMapping
-    public ResponseEntity<List<Brands>> getAllBrands() {
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllBrands() {
         List<Brands> brandsList = brandsService.findAll();
-        return new ResponseEntity<>(brandsList, HttpStatus.OK);
+//        return new ResponseEntity<>(brandsList, HttpStatus.OK);
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("brand",brandsList))
+                        .message("Success")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
     }
 
     @GetMapping("/{id}")
@@ -39,9 +54,18 @@ public class BrandsController {
     }
 
     @PostMapping
-    public ResponseEntity<Brands> addBrand(@RequestBody Brands brand) throws ApiMessage {
+    public ResponseEntity<?> addBrand(@RequestBody Brands brand) throws ApiMessage {
         Brands savedBrand = brandsService.save(brand);
-        return new ResponseEntity<>(savedBrand, HttpStatus.CREATED);
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("brand","Inserted"))
+                        .message("Success")
+                        .status(HttpStatus.CREATED)
+                        .statusCode(HttpStatus.CREATED.value())
+                        .build()
+        );
+//        return new ResponseEntity<>("Inserted", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
