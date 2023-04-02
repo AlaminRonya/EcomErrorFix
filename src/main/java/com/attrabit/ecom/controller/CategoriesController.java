@@ -4,6 +4,7 @@ package com.attrabit.ecom.controller;
 
 import com.attrabit.ecom.dto.request.RequestCategoryDTO;
 
+import com.attrabit.ecom.dto.response.Response;
 import com.attrabit.ecom.exception.ApiMessage;
 import com.attrabit.ecom.model.Categories;
 import com.attrabit.ecom.service.CategoriesService;
@@ -16,23 +17,44 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
+import static java.time.LocalDateTime.now;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:4200")
 public class CategoriesController {
     private final CategoriesService categoriesService;
     private final CategorySearchService categorySearchService;
     @PostMapping("/api/v1/users/addCategory")
     public ResponseEntity<?> addCategory(@Valid @RequestBody RequestCategoryDTO dto) throws ApiMessage {
         categoriesService.addCategory(dto);
-        return new ResponseEntity<>("add Category", HttpStatus.OK);
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("category","Inserted"))
+                        .message("Success")
+                        .status(HttpStatus.CREATED)
+                        .statusCode(HttpStatus.CREATED.value())
+                        .build()
+        );
+//        return new ResponseEntity<>("add Category", HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/users/addCategory/all")
     public ResponseEntity<?> getAllCategory(){
-        return new ResponseEntity<>(categoriesService.getAllCategory(), HttpStatus.OK);
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("categories",categoriesService.getAllCategory()))
+                        .message("Success")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+//        return new ResponseEntity<>(categoriesService.getAllCategory(), HttpStatus.OK);
     }
 
     @DeleteMapping("/api/v1/users/category/{slug}")
@@ -58,7 +80,17 @@ public class CategoriesController {
             return new ResponseEntity<>("Slug is empty or null", HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(categorySearchService.getAllSubCategory(slug), HttpStatus.OK);
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("categories",categorySearchService.getAllSubCategory(slug)))
+                        .message("Success")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+
+//        return new ResponseEntity<>(categorySearchService.getAllSubCategory(slug), HttpStatus.OK);
     }
 
 }

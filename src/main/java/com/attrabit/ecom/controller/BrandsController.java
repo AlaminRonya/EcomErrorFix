@@ -34,7 +34,7 @@ public class BrandsController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("brand",brandsList))
+                        .data(Map.of("brands",brandsList))
                         .message("Success")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -44,6 +44,7 @@ public class BrandsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Brands> getBrandById(@PathVariable Long id) {
+
         Optional<Brands> brandOptional = brandsService.findById(id);
         if (brandOptional.isPresent()) {
             Brands brand = brandOptional.get();
@@ -85,7 +86,8 @@ public class BrandsController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteBrand(@PathVariable Long id) {
+    public ResponseEntity<?> deleteBrand(@PathVariable Long id) {
+        System.out.println("=========>"+id);
         Optional<Brands> brandOptional = brandsService.findById(id);
         if (brandOptional.isPresent()) {
             brandsService.deleteById(id);
