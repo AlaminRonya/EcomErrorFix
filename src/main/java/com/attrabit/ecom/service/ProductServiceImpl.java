@@ -46,6 +46,7 @@ public class ProductServiceImpl implements ProductService, ProductSearchService{
             }
             List<Attachment> attachments = new ArrayList<>();
             for (MultipartFile file : multipartFiles){
+
                 attachments.add(fileService.uploadImage("D:/Attrabit/Nafi/Second/ecom/src/main/resources/static/productImages", file));
             }
             final List<Attachment> attachmentList = attachmentRepository.saveAll(attachments);

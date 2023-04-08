@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,12 +26,13 @@ import static org.springframework.http.HttpStatus.*;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:4200")
 public class ProductController {
     private final ProductService productService;
     private final ProductSearchService productSearchService;
 
-    @PostMapping("/product")
-    public ResponseEntity<?> addProduct(@RequestParam("image") MultipartFile[] multipartFiles, @RequestParam("dto") String dto) throws ApiMessage, JsonProcessingException {
+    @PostMapping(value = "/product", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<?> addProduct(@RequestPart("image") MultipartFile[] multipartFiles, @RequestPart("dto") String dto) throws ApiMessage, JsonProcessingException {
 //        System.out.println((multipartFiles[0]!=null)+"================"+ multipartFiles[0].isEmpty()+" == "+(multipartFiles[0]==null));
 //        if (multipartFiles == null){
 //            return new ResponseEntity<>("Not add product", HttpStatus.NO_CONTENT);
@@ -87,7 +89,7 @@ public class ProductController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("allProduct",allProduct))
+                        .data(Map.of("products",allProduct))
                         .message("Success")
                         .status(OK)
                         .statusCode(OK.value())

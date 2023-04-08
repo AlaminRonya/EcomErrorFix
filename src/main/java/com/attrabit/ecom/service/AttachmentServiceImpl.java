@@ -1,6 +1,6 @@
 package com.attrabit.ecom.service;
 
-import com.attrabit.ecom.dto.respose.ResponseAttachmentDTO;
+import com.attrabit.ecom.dto.response.ResponseAttachmentDTO;
 import com.attrabit.ecom.mapper.ResponseAttachmentDTOMapper;
 import com.attrabit.ecom.model.Attachment;
 import com.attrabit.ecom.repository.AttachmentRepository;

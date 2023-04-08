@@ -1,5 +1,5 @@
 package com.attrabit.ecom.dto.response;
-import com.attrabit.ecom.dto.respose.ResponseAttachmentDTO;
+import com.attrabit.ecom.dto.response.ResponseAttachmentDTO;
 
 import java.math.BigDecimal;
 import java.util.Date;

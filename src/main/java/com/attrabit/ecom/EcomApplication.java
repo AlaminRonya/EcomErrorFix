@@ -15,19 +15,19 @@ public class EcomApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EcomApplication.class, args);
 	}
-	@Bean
-	CommandLineRunner addRoles(RolesRepository repository){
-		return args -> {
-			Roles roles = new Roles();
-			roles.setPermissions("ROLE_USER");
-			Roles roles2 = new Roles();
-			roles2.setPermissions("ROLE_MEMBER");
-
-			repository.saveAll(List.of(
-					roles, roles2
-			));
-		};
-	}
+//	@Bean
+//	CommandLineRunner addRoles(RolesRepository repository){
+//		return args -> {
+//			Roles roles = new Roles();
+//			roles.setPermissions("ROLE_USER");
+//			Roles roles2 = new Roles();
+//			roles2.setPermissions("ROLE_MEMBER");
+//
+//			repository.saveAll(List.of(
+//					roles, roles2
+//			));
+//		};
+//	}
 
 
 

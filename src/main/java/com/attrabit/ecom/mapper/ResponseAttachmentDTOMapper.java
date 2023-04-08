@@ -1,6 +1,6 @@
 package com.attrabit.ecom.mapper;
 
-import com.attrabit.ecom.dto.respose.ResponseAttachmentDTO;
+import com.attrabit.ecom.dto.response.ResponseAttachmentDTO;
 import com.attrabit.ecom.model.Attachment;
 import org.springframework.stereotype.Service;
 
